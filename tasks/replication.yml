@@ -34,6 +34,14 @@
     - mysql_replication_role == 'slave'
     - (mysql_replication_master | length) > 0
   tags: ['skip_ansible_galaxy']
+  
+- name: Stop mysql slave thread.
+  mysql_replication: mode=stopslave
+  when:
+    - (slave.Is_Slave is defined and not slave.Is_Slave) or (slave.Is_Slave is not defined and slave is failed)
+    - mysql_replication_role == 'slave'
+    - (mysql_replication_master | length) > 0
+  tags: ['skip_ansible_galaxy']
 
 - name: Configure replication on the slave.
   mysql_replication:
