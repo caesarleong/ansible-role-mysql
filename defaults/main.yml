@@ -128,3 +128,9 @@ mysql_replication_role: ''
 mysql_replication_master: ''
 # Same keys as `mysql_users` above.
 mysql_replication_user: []
+
+# Character set settings
+mysql_charset_config: false
+# mysql_charset_handshake: "False"
+# mysql_default_charset: "utf8mb4"
+# mysql_collation: "utf8mb4_unicode_ci"
