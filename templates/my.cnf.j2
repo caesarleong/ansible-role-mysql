@@ -4,6 +4,14 @@
 #password = your_password
 port = {{ mysql_port }}
 socket = {{ mysql_socket }}
+{% if mysql_charset_config %}
+default-character-set = {{ mysql_default_charset }}
+{% endif %}
+
+{% if mysql_charset_config %}
+[mysql]
+default-character-set = {{ mysql_default_charset }}
+{% endif %}
 
 [mysqld]
 port = {{ mysql_port }}
@@ -108,6 +116,14 @@ innodb_log_file_size = {{ mysql_innodb_log_file_size }}
 innodb_log_buffer_size = {{ mysql_innodb_log_buffer_size }}
 innodb_flush_log_at_trx_commit = {{ mysql_innodb_flush_log_at_trx_commit }}
 innodb_lock_wait_timeout = {{ mysql_innodb_lock_wait_timeout }}
+
+# character set setting
+{% if mysql_charset_config %}
+character-set-client-handshake = {{ mysql_charset_handshake }}
+collation-server = {{ mysql_collation }}
+init-connect = 'SET NAMES {{ mysql_default_charset }} COLLATE {{ mysql_collation }}'
+character-set-server = {{ mysql_default_charset }}
+{% endif %}
 
 [mysqldump]
 quick
